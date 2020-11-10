@@ -1,0 +1,15 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+
+button {
+    background-color: $orange;
+    color: $white
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}

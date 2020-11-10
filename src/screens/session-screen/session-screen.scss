@@ -1,0 +1,97 @@
+@import '../../styles/variables.scss';
+
+.game-screen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shot__wrap {
+  background-color: $orange;
+  box-shadow: 0px 0px 10px 0px black;
+  border-radius: 10px;
+}
+
+.target-progress__wrap {
+  width: 40%;
+  margin: 2vw;
+}
+
+.target__wrap {
+  width: 100%;
+  box-shadow: 0px 0px 10px 0px black;
+  margin: 5% 0;
+  border: 2vw solid $grey;
+  border-radius: 10px;
+}
+
+.target {
+  width: 100%;
+}
+
+.info__wrap {
+  width: 60%;
+  padding: 3% 2%;
+}
+
+.game__name {
+  font-size: 5vw;
+  margin-bottom: 2vw;
+}
+
+.player__wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $grey;
+  border: solid 3px $orange;
+  padding: 1vw 0;
+  flex: 1;
+  font-size: 1.5vw;
+}
+
+.player__active {
+  color: $white;
+  background-color: $orange;
+  border: solid 3px $orange;
+  font-size: 2vw;
+}
+
+.players__wrap {
+  background-color: $white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 10vh;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.player-card {
+  background-color: $white;
+  color: $grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 2% 0;
+  height: 30vh;
+  border-radius: 10px;
+}
+
+.player-score {
+  font-size: 5vw;
+}
+
+.player-info {
+  margin: 2%;
+  font-size: 3vw;
+}
+
+.button__wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
