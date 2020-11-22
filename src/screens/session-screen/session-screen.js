@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import LinkButton from '../../components/UI/link-button/link-button'
 import CustomButton from '../../components/UI/custom-button/custom-button'
 
 import Shots from '../../components/session-parts/shots/shots'
+import * as actionTypes from '../../store/actions'
 
 import './session-screen.scss'
 
 import Target from '../../assets/images/target.png'
+
 
 
 class SessionScreen extends Component {
@@ -18,9 +21,6 @@ class SessionScreen extends Component {
         shots: 10,
         shotsRemaining: 10,
         imageUrl: Target,
-        gameType: 'Cluster',
-        score: "",
-        name: "Player",
         score: 0,
         time: 0
     }
@@ -36,7 +36,7 @@ class SessionScreen extends Component {
 
     shotsFired = () => {
         this.setState({
-            shotsRemaining: this.state.shotsRemaining - 1
+            shotsRemaining: this.props.shotsRemaining - 1
         })
     }
 
@@ -63,17 +63,20 @@ class SessionScreen extends Component {
     }
 
     shotsHandler = () => {
-        this.shotsFired();
-        if (this.state.shotsRemaining === 1) {
+        this.props.onShotsFired();
+        console.log(this.props.shotsRemaining)
+        if (this.props.shotsRemaining === 1) {
             this.handleStop();
         }
     }
 
     missHandler = () => {
+        this.props.onShotMiss();
         this.shotsHandler()
     }
 
     hitHandler = () => {
+        this.props.onShotHit();
         this.shotsHandler()
     }
 
@@ -86,15 +89,16 @@ class SessionScreen extends Component {
                         <img className="target" src={this.state.imageUrl} alt="Target" />
                     </div>
                     <div className="shots__wrap">
-                        <Shots shots={this.state.shots} shotsRemaining={this.state.shotsRemaining} />
+                        <Shots shots={this.props.shots} shotsRemaining={this.props.shotsRemaining} />
                     </div>
                 </div>
                 <div className="info__wrap">
-                    <h3 className="game-name">{this.state.gameType}</h3>
+                    <h3 className="game-name">{this.props.gameType}</h3>
                     <div className="players__wrap">
                         <div className={['player__wrap', "player__active"].join(' ')} >
-                            <h2>{this.state.name}</h2>
-                            <p>Score: {this.state.score}</p>
+                            <h2>{this.props.name}</h2>
+                            <p>Score: {this.props.score}</p>
+                            <p>Misses: {this.props.miss}</p>
                             <p >Time: {this.getMin(this.state.time)}:{this.getSeconds(this.state.time)}</p>
                         </div>
                     </div>
@@ -104,8 +108,8 @@ class SessionScreen extends Component {
                     </div>
                     <div className="button__wrap">
                         <CustomButton clicked={this.handleStart} disabled={this.state.gameDone || this.state.roundStart}>Start</CustomButton>
-                        <CustomButton clicked={this.missHandler} disabled={!this.state.timer || this.state.gameDone || this.state.shotsRemaining == 0}>Next Shot</CustomButton>
-                        <CustomButton clicked={this.hitHandler} disabled={!this.state.timer || this.state.gameDone || this.state.shotsRemaining == 0}>Missed Shot</CustomButton>
+                        <CustomButton clicked={this.hitHandler} disabled={!this.state.timer || this.state.gameDone || this.props.shotsRemaining == 0}>Next Shot</CustomButton>
+                        <CustomButton clicked={this.missHandler} disabled={!this.state.timer || this.state.gameDone || this.props.shotsRemaining == 0}>Missed Shot</CustomButton>
                     </div>
                     <hr style={{ backgroundColor: 'white' }} />
                     <div className="button__wrap">
@@ -118,4 +122,23 @@ class SessionScreen extends Component {
     }
 }
 
-export default SessionScreen;
+const mapStatToProps = state => {
+    return {
+        name: state.name,
+        shots: state.shots,
+        shotsRemaining: state.shotsRemaining,
+        score: state.score,
+        miss: state.miss,
+        gameType: state.gameType,
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onShotsFired: () => dispatch({ type: actionTypes.SHOT_FIRED }),
+        onShotMiss: () => dispatch({ type: actionTypes.MISS_COUNTER }),
+        onShotHit: () => dispatch({ type: actionTypes.HIT_COUNTER })
+    };
+}
+
+export default connect(mapStatToProps, mapDispatchToProps)(SessionScreen);
