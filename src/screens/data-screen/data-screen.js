@@ -12,6 +12,7 @@ class DataScreen extends Component {
                 <h2>Name: {this.props.name}</h2>
                 <h2>Score: {this.props.score}</h2>
                 <h2>Misses: {this.props.miss}</h2>
+                <h2>Time: {this.props.timer}</h2>
                 <LinkButton link="/">Home</LinkButton >
             </div>
         )
@@ -28,6 +29,7 @@ const mapStateToProps = state => {
         score: state.score,
         miss: state.miss,
         gameType: state.gameType,
+        timer: state.timer,
     };
 }
 

@@ -7,21 +7,17 @@ const intialState = {
     shotsRemaining: 10,
     score: 0,
     miss: 0,
+    timer: '0:00',
 }
 
 
 const reducer = (state = intialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_PLAYER:
+            console.log(action.payload.username)
             return {
                 ...state,
                 players: [action.payload]
-            }
-        case actionTypes.SHOTS:
-            return {
-                ...state,
-                shots: action.shots,
-                shotsRemaining: action.shotsRemaining
             }
         case actionTypes.SHOT_FIRED:
             if (state.shotsRemaining > 0) {
@@ -39,6 +35,20 @@ const reducer = (state = intialState, action) => {
             return {
                 ...state,
                 score: state.score + 10,
+            }
+        case actionTypes.RESET_SHOTS:
+            return {
+                ...state,
+                shotsRemaining: intialState.shots,
+                score: intialState.score,
+                miss: intialState.miss,
+                timer: intialState.timer,
+            }
+        case actionTypes.GET_TIME:
+            console.log(action.payload)
+            return {
+                ...state,
+                timer: action.payload,
             }
         default:
             return state;

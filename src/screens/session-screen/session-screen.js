@@ -18,11 +18,12 @@ class SessionScreen extends Component {
         timer: 0,
         gameDone: false,
         roundStart: false,
-        shots: 10,
-        shotsRemaining: 10,
         imageUrl: Target,
-        score: 0,
         time: 0
+    }
+
+    componentDidMount() {
+        this.props.resetShots();
     }
 
 
@@ -60,6 +61,8 @@ class SessionScreen extends Component {
     handleStop = () => {
         clearInterval(this.incrementer);
         this.incrementer = null;
+        var finalTime = `${this.getMin(this.state.timer)}:${this.getSeconds(this.state.timer)}`
+        this.props.getTime(finalTime)
     }
 
     shotsHandler = () => {
@@ -99,7 +102,7 @@ class SessionScreen extends Component {
                             <h2>{this.props.name}</h2>
                             <p>Score: {this.props.score}</p>
                             <p>Misses: {this.props.miss}</p>
-                            <p >Time: {this.getMin(this.state.time)}:{this.getSeconds(this.state.time)}</p>
+                            <p >Time: {this.props.timer} </p>
                         </div>
                     </div>
                     <div className="player-card">
@@ -130,14 +133,17 @@ const mapStatToProps = state => {
         score: state.score,
         miss: state.miss,
         gameType: state.gameType,
+        timer: state.timer
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onShotsFired: () => dispatch({ type: actionTypes.SHOT_FIRED }),
+        onShotsFired: () => dispatch({ type: actionTypes.SHOT_FIRED, }),
         onShotMiss: () => dispatch({ type: actionTypes.MISS_COUNTER }),
-        onShotHit: () => dispatch({ type: actionTypes.HIT_COUNTER })
+        onShotHit: () => dispatch({ type: actionTypes.HIT_COUNTER }),
+        getTime: (time) => dispatch({ type: actionTypes.GET_TIME, payload: time }),
+        resetShots: () => dispatch({ type: actionTypes.RESET_SHOTS })
     };
 }
 

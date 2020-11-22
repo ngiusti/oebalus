@@ -59,7 +59,7 @@ class LoginForm extends Component {
                 />
                 <CustomButton type="submit">Login</CustomButton>
                 <CustomButton>Guest</CustomButton>
-                <CustomButton clicked={this.props.loggedIn}>Create Account</CustomButton>
+                <CustomButton clicked={this.props.isMember}>Create Account</CustomButton>
             </form >
         )
     }

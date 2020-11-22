@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import * as actionTypes from './store/actions'
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
 
@@ -32,7 +34,7 @@ class App extends Component {
               ...snapShot.data()
             }
           })
-          console.log(this.state);
+          this.props.onSetUser(this.state.currentUser)
         });
       }
       else {
@@ -60,4 +62,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetUser: (userData) => dispatch({ type: actionTypes.ADD_PLAYER, payload: userData }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

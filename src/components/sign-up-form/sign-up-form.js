@@ -75,7 +75,7 @@ class SignUpForm extends Component {
                     required
                 />
                 <CustomButton type="submit">Sign Up</CustomButton>
-                <CustomButton clicked={this.props.loggedIn}>Back</CustomButton>
+                <CustomButton clicked={this.props.isMember}>Back</CustomButton>
             </form>
         )
     }
