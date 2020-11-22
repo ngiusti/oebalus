@@ -19,6 +19,11 @@ const reducer = (state = intialState, action) => {
                 ...state,
                 players: [action.payload]
             }
+        case actionTypes.ADD_GUEST:
+            return {
+                ...state,
+                players: ['Guest']
+            }
         case actionTypes.SHOT_FIRED:
             if (state.shotsRemaining > 0) {
                 return {

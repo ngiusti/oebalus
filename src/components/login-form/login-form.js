@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import * as actionTypes from '../../store/actions'
 
 import FormInput from '../form-input/form-input'
 import CustomButton from '../UI/custom-button/custom-button'
@@ -36,6 +38,12 @@ class LoginForm extends Component {
         }
     }
 
+    handleGuest = event => {
+        event.preventDefault();
+        this.props.onGuestLogin();
+        console.log(this.props.stateVal)
+    }
+
     render() {
         const { email, password } = this.state;
 
@@ -58,11 +66,23 @@ class LoginForm extends Component {
                     required
                 />
                 <CustomButton type="submit">Login</CustomButton>
-                <CustomButton>Guest</CustomButton>
+                <CustomButton clicked={this.handleGuest}>Guest</CustomButton>
                 <CustomButton clicked={this.props.isMember}>Create Account</CustomButton>
             </form >
         )
     }
 }
 
-export default LoginForm
+const mapStateToProps = state => {
+    return {
+        stateVal: state,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGuestLogin: () => dispatch({ type: actionTypes.ADD_GUEST }),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

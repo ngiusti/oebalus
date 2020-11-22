@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as actionTypes from '../../store/actions'
 
 import PlayerLogin from '../../components/player-login/player-login'
 import LinkButton from '../../components/UI/link-button/link-button'
@@ -27,9 +28,9 @@ const mapStateToProps = () => {
     }
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = dispatch => {
     return {
-
+        onPlayerLogin: () => dispatch({ type: actionTypes.ADD_PLAYER, }),
     }
 }
 
