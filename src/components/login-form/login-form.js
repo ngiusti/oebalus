@@ -5,6 +5,8 @@ import * as actionTypes from '../../store/actions'
 import FormInput from '../form-input/form-input'
 import CustomButton from '../UI/custom-button/custom-button'
 
+import './login-form.scss';
+
 import { auth } from '../../firebase/firebase.utils'
 
 class LoginForm extends Component {
@@ -48,7 +50,7 @@ class LoginForm extends Component {
         const { email, password } = this.state;
 
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="login-form__wrap" onSubmit={this.handleSubmit}>
                 <FormInput
                     type='email'
                     name='email'
@@ -65,9 +67,9 @@ class LoginForm extends Component {
                     value={password}
                     required
                 />
-                <CustomButton type="submit">Login</CustomButton>
-                <CustomButton clicked={this.handleGuest}>Guest</CustomButton>
-                <CustomButton clicked={this.props.isMember}>Create Account</CustomButton>
+                <CustomButton fullWidth={true} type="submit">Login</CustomButton>
+                <CustomButton fullWidth={true} clicked={this.handleGuest}>Guest</CustomButton>
+                <CustomButton fullWidth={true} clicked={this.props.isMember}>Create Account</CustomButton>
             </form >
         )
     }

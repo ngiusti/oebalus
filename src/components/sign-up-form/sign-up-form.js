@@ -49,7 +49,7 @@ class SignUpForm extends Component {
         const { username, email, password } = this.state;
 
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="sign-up-form__wrap" onSubmit={this.handleSubmit}>
                 <FormInput
                     type='text'
                     name='username'

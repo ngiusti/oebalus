@@ -33,11 +33,11 @@ class PlayerLogin extends Component {
 
         return (
             <div className="player-login__wrap">
-                <h2>Player {this.props.player}</h2>
+                <h2 className="player-login__player">Player {this.props.player}</h2>
                 {
                     isLoggedIn ? (isMember ? <LoginForm isMember={this.handlerisMember} /> : <SignUpForm isMember={this.handlerisMember} />) : <LoggedInCard />
                 }
-                <CustomButton clicked={this.HandleLoggedInState}>Toggle Logged in</CustomButton>
+                <CustomButton fullWidth={true} clicked={this.HandleLoggedInState}>Toggle Logged in</CustomButton>
             </div>
         )
     }
