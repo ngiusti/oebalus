@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.home-header__wrap {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.home-header {
+    color: $white;
+    font-size: 80px;
+}

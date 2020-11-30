@@ -1,11 +1,16 @@
 import React from 'react'
 
+import './home-screen.scss'
+
 import LinkButton from '../../components/UI/link-button/link-button'
+import Badge from '../../components/badge/badge'
 
 const HomeScreen = () => (
     <div className="center-content">
-        <h1>Home</h1>
-        <LinkButton link="/Login">Login</LinkButton >
+        <div className="home-header__wrap">
+            <Badge />
+        </div>
+        <LinkButton link="/Login">Start</LinkButton >
     </div>
 )
 
